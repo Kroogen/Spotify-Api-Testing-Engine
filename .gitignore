@@ -23,3 +23,6 @@ allure-report/
 
 ### Mac OS ###
 .DS_Store
+
+### Spotify ###
+config.properties
