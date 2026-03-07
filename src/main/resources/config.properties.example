@@ -1,0 +1,18 @@
+# Spotify credentials
+client_id=<Spotify_client_id>
+client_secret=<Spotify_client_secret>
+client_grant_type=client_credentials
+
+# Base URL
+# Used in the autentication (OAuth)
+accounts_url=https://accounts.spotify.com
+
+# Api calls
+base_url=https://api.spotify.com/v1
+user_id=<Spotify_user_id>
+
+# Spotify access
+# The refresh_token can be obteined with the RenewTokenUtil.class
+refresh_token=<Spotify_access_code>
+redirect_uri=<https://redirect_uri.com>
+auth_code_grant_type:authorization_code

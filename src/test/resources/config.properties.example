@@ -1,9 +1,0 @@
-# Spotify credentials
-client_id=<Spotify_client_id>
-client_secret=<Spotify_client_secret>
-grant_type=<Grant_type>
-# Base URL
-# Used in the autentication (OAuth)
-accounts_url=<https://accounts.url.com>
-# Api calls
-base_url=<https://url.for.api.calls>
