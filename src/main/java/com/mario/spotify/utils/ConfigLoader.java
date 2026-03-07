@@ -28,18 +28,43 @@ public class ConfigLoader {
     }
 
     public String getClientId() {
-        return properties.getProperty("client_id");
+        return properties.getProperty("client_id").trim();
     }
 
     public String getClientSecret() {
-        return properties.getProperty("client_secret");
+        return properties.getProperty("client_secret").trim();
+    }
+
+    public String getClientGrantType() {
+        return properties.getProperty("client_grant_type").trim();
     }
 
     public String getAccountsUrl() {
-        return properties.getProperty("accounts_url");
+        return properties.getProperty("accounts_url").trim();
     }
 
     public String getBaseUrl() {
-        return properties.getProperty("base_url");
+        return properties.getProperty("base_url").trim();
     }
+
+    public String getUserId() {
+        return properties.getProperty("user_id").trim();
+    }
+
+    public String getRefreshToken() {
+        return properties.getProperty("refresh_token").trim();
+    }
+
+    public String getRedirectUri() {
+        return properties.getProperty("redirect_uri").trim();
+    }
+
+    public String getAuthCodeGrantType() {
+        return properties.getProperty("auth_code_grant_type").trim();
+    }
+
+    public String getAuthCode() {
+        return properties.getProperty("code").trim();
+    }
+
 }
