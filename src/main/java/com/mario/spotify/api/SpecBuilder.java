@@ -18,7 +18,6 @@ public class SpecBuilder {
         return new RequestSpecBuilder()
                 .setBaseUri(baseUrl)
                 .addHeader("Authorization", "Bearer " + access_token)
-                .setContentType(ContentType.JSON)
                 .log(LogDetail.ALL)
                 .build();
     }
