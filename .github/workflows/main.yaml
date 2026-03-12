@@ -1,0 +1,36 @@
+name: Spotify API Test Execution
+
+on:
+  push:
+    branches: [ "main", "feature/*" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Create config.properties
+        run: |
+          echo "client_id=${{ secrets.CLIENT_ID }}" >> src/main/resources/config.properties
+          echo "client_secret=${{ secrets.CLIENT_SECRET }}" >> src/main/resources/config.properties
+          echo "refresh_token=${{ secrets.REFRESH_TOKEN }}" >> src/main/resources/config.properties
+          echo "user_id=${{ secrets.USER_ID }}" >> src/main/resources/config.properties
+          echo "base_url=${{ secrets.BASE_URL }}" >> src/main/resources/config.properties
+          echo "accounts_url=${{ secrets.ACCOUNTS_URL }}" >> src/main/resources/config.properties
+          echo "redirect_uri=${{ secrets.REDIRECT_URI }}" >> src/main/resources/config.properties
+          echo "auth_code_grant_type=${{ secrets.AUTH_CODE_GRANT_TYPE }}" >> src/main/resources/config.properties
+          echo "client_grant_type=${{ secrets.CLIENT_GRANT_TYPE }}" >> src/main/resources/config.properties
+
+      - name: Run Test with Maven
+        run: mvn clean test
