@@ -11,6 +11,8 @@ public class PlaylistApi {
     private final String ME_PLAYLISTS = "/me/playlists";
     private final String GET_PLAYLISTS = "/playlists";
     private final String UNFOLLOW_PLAYLIST = "/followers";
+    private final String ADD_PLAYLIST_PATH = "/items";
+
 
     // Post method
     public Response postPlaylist(Playlist requestPlaylist) {
@@ -31,12 +33,12 @@ public class PlaylistApi {
 
     // Get method
     public Response getPlaylist(String id) {
-        RequestSpecification requestSepcification = SpecBuilder.getRequestSpecification();
+        RequestSpecification requestSpecification = SpecBuilder.getRequestSpecification();
         ResponseSpecification responseSpecification = SpecBuilder.getResponseSpec();
 
         return RestAssured
                 .given()
-                .spec(requestSepcification)
+                .spec(requestSpecification)
                 .when()
                 .get(GET_PLAYLISTS + "/" + id)
                 .then()
@@ -70,6 +72,23 @@ public class PlaylistApi {
                 .delete(GET_PLAYLISTS + "/" + id + UNFOLLOW_PLAYLIST)
                 .then()
                 .extract().response();
+    }
+
+    // Add a track in the playlist
+    public Response postTrackInPlaylist(String playlistId, String trackUri) {
+        RequestSpecification requestSpecification = SpecBuilder.getRequestSpecification();
+        ResponseSpecification responseSpecification = SpecBuilder.getResponseSpec();
+
+        return RestAssured
+                .given()
+                .spec(requestSpecification)
+                .queryParam("uris", trackUri)
+                .when()
+                .post(GET_PLAYLISTS + "/" + playlistId + ADD_PLAYLIST_PATH)
+                .then()
+                .spec(responseSpecification)
+                .extract()
+                .response();
     }
 
 }
