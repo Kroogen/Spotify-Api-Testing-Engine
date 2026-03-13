@@ -31,6 +31,23 @@ public class PlaylistApi {
                 .extract().response();
     }
 
+    // Post method used for negative tests Scenarios
+    public Response postPlaylist(Playlist requestPlaylist, String token) {
+        RequestSpecification requestSpecification = SpecBuilder.getFakeRequestSpecification(token);
+        ResponseSpecification responseSpecification = SpecBuilder.getResponseSpec();
+
+        return RestAssured
+                .given()
+                .spec(requestSpecification)
+                .contentType(ContentType.JSON)
+                .body(requestPlaylist)
+                .when()
+                .post(ME_PLAYLISTS)
+                .then()
+                .spec(responseSpecification)
+                .extract().response();
+    }
+
     // Get method
     public Response getPlaylist(String id) {
         RequestSpecification requestSpecification = SpecBuilder.getRequestSpecification();

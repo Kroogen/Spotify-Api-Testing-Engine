@@ -6,18 +6,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.extern.jackson.Jacksonized;
 
-
 @Data
 @Builder
 @Jacksonized
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Playlist {
-    @JsonProperty("name")
-    private String name;
+public class ErrorDetails {
+    @JsonProperty("status")
+    private int status;
 
-    @JsonProperty("description")
-    private String description;
-
-    @JsonProperty("public")
-    private Boolean isPublic;
+    @JsonProperty("message")
+    private String message;
 }

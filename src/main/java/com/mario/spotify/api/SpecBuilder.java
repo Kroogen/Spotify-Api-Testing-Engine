@@ -22,11 +22,20 @@ public class SpecBuilder {
                 .build();
     }
 
+    public static RequestSpecification getFakeRequestSpecification(String fakeToken) {
+        String baseUrl = ConfigLoader.getInstance().getBaseUrl();
+
+        return new RequestSpecBuilder()
+                .setBaseUri(baseUrl)
+                .addHeader("Authorization", "Bearer " + fakeToken)
+                .log(LogDetail.ALL)
+                .build();
+    }
+
     public static ResponseSpecification getResponseSpec() {
         return new ResponseSpecBuilder()
                 .expectContentType(ContentType.JSON)
                 .log(LogDetail.ALL)
                 .build();
     }
-
 }
