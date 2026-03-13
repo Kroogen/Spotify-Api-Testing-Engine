@@ -34,3 +34,20 @@ jobs:
 
       - name: Run Test with Maven
         run: mvn clean test
+
+      - name: Create Allure Environment File
+        if: always()
+        run: |
+          echo "Platform=GitHub Actions" >> allure-results/environment.properties
+          echo "Java_Version=17" >> allure-results/environment.properties
+          echo "Base_URL=${{ secrets.BASE_URL }}" >> allure-results/environment.properties
+          
+      - name: Generate Allure Report
+        run: mvn allure:report
+
+      - name: Upload Allure Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: target/site/allure-maven-plugin/
