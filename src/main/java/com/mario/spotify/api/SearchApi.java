@@ -1,5 +1,6 @@
 package com.mario.spotify.api;
 
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -9,6 +10,7 @@ public class SearchApi {
 
     private final String SEARCH_PATH = "/search";
 
+    @Step("Obtains the Track id")
     public Response getTrackId(String trackName) {
         RequestSpecification requestSpecification = SpecBuilder.getRequestSpecification();
         ResponseSpecification responseSpecification = SpecBuilder.getResponseSpec();

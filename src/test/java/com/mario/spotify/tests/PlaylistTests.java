@@ -1,32 +1,42 @@
 package com.mario.spotify.tests;
 
+import com.mario.spotify.api.AccountApi;
 import com.mario.spotify.api.PlaylistApi;
 import com.mario.spotify.models.Playlist;
-import com.mario.spotify.utils.ConfigLoader;
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+@Feature("Playlist API")
 public class PlaylistTests {
 
+    private static final Logger logger = LogManager.getLogger(PlaylistTests.class);
     private String playlistId;
     private PlaylistApi playlistApi;
     private String expectedPlaylistName = "Test Playlist";
     private String expectedDescription = "Description for Test Playlist";
     private Boolean expectedPublic = true;
-    private String expectedUserId = ConfigLoader.getInstance().getUserId();
+    private String expectedUserId;
     private String expectedType = "playlist";
     private int expectedItems = 0;
 
     @BeforeClass
     public void setup() {
         playlistApi = new PlaylistApi();
+        expectedUserId = AccountApi.getUserProfile().path("id");
     }
 
+    @Story("Create a Playlist")
+    @Description("This test validates that a user can successfully create a new playlist with name and description")
     @Test(priority = 1)
     public void testCreatePlaylist() {
-
+        logger.info("--- Starting test: testCreatePlaylist");
         Playlist playlist = Playlist
                 .builder()
                 .name(expectedPlaylistName)
@@ -70,10 +80,14 @@ public class PlaylistTests {
                 "The total items in the Playlist is: " + actualTotalItems + " but should be: " + expectedItems);
 
         softAssert.assertAll();
+        logger.info("--- Completed test: testCreatePlaylist");
     }
 
+    @Story("Validate playlist creation")
+    @Description("This test validate the user can retrieve the playlist created")
     @Test(priority = 2, dependsOnMethods = "testCreatePlaylist")
     public void testGetPlaylist() {
+        logger.info("--- Starting test: testGetPlaylist");
         Response response = playlistApi.getPlaylist(playlistId);
         response
                 .then()
@@ -106,10 +120,14 @@ public class PlaylistTests {
                 expectedItems,
                 "The total items in the Playlist is: " + actualTotalItems + " but should be: " + expectedItems);
         softAssert.assertAll();
+        logger.info("--- Completed test: testGetPlaylist");
     }
 
+    @Story("Update playlist information")
+    @Description("This test validate the user is able to change the information in the playlist")
     @Test(priority = 3, dependsOnMethods = "testCreatePlaylist")
     public void testUpdatePlaylist() {
+        logger.info("--- Starting test: testUpdatePlaylist");
         String expectedNewName = "Playlist v2";
         String expectedNewDescription = "Playlist modified";
 
@@ -156,13 +174,18 @@ public class PlaylistTests {
                 expectedItems,
                 "The total items in  the Playlist is: " + actualTotalItems + " but should be: " + expectedItems);
         softAssert.assertAll();
+        logger.info("--- Completed test: testUpdatePlaylist");
     }
 
+    @Story("Unlink playlist")
+    @Description("The test validate the user can unlink the playlist from its account")
     @Test(priority = 4, dependsOnMethods = "testCreatePlaylist")
     public void testDeletePlaylist() {
+        logger.info("--- Starting test: testDeletePlaylist");
         Response response = playlistApi.deletePlaylist(playlistId);
         response
                 .then()
                 .statusCode(200);
+        logger.info("--- Completed test: testDeletePlaylist");
     }
 }

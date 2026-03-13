@@ -17,6 +17,7 @@ target/
 ### Allure Reports ###
 allure-results/
 allure-report/
+.allure/
 
 ### VS Code ###
 .vscode/
@@ -26,3 +27,6 @@ allure-report/
 
 ### Spotify ###
 config.properties
+
+### Logs ###
+logs/
