@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "artists"
+  ],
+  "properties": {
+    "artists": {
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "name",
+              "type",
+              "uri"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string",
+                "pattern": "^artist$"
+              },
+              "uri": {
+                "type": "string",
+                "pattern": "^spotify:artist:.*"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

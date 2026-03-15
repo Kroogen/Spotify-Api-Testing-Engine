@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 public class TokenManager {
     private static String access_token;
 
-    public static String getToken() {
+    public synchronized static String getToken() {
         if (access_token == null) {
             access_token = renewToken();
         }
