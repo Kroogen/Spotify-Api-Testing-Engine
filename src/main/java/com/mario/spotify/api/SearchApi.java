@@ -28,4 +28,22 @@ public class SearchApi {
                 .response();
     }
 
+    @Step("Obtains the Item id")
+    public Response getItem(String name, String type) {
+        RequestSpecification requestSpecification = SpecBuilder.getRequestSpecification();
+        ResponseSpecification responseSpecification = SpecBuilder.getResponseSpec();
+
+        return RestAssured
+                .given()
+                .spec(requestSpecification)
+                .queryParam("q", name)
+                .queryParam("type", type)
+                .when()
+                .get(SEARCH_PATH)
+                .then()
+                .spec(responseSpecification)
+                .extract()
+                .response();
+    }
+
 }

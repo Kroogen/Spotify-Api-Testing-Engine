@@ -1,0 +1,87 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "tracks"
+  ],
+  "properties": {
+    "tracks": {
+      "type": "object",
+      "required": [
+        "items"
+      ],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "album",
+              "disc_number",
+              "duration_ms",
+              "explicit",
+              "id",
+              "is_playable",
+              "name",
+              "track_number",
+              "type",
+              "uri"
+            ],
+            "properties": {
+              "album": {
+                "type": "object",
+                "required": [
+                  "id",
+                  "name",
+                  "uri"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "uri": {
+                    "type": "string",
+                    "pattern": "spotify:album:.*"
+                  }
+                }
+              },
+              "disc_number": {
+                "type": "integer"
+              },
+              "duration_ms": {
+                "type": "integer"
+              },
+              "explicit": {
+                "type": "boolean"
+              },
+              "id": {
+                "type": "string"
+              },
+              "is_playable": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              },
+              "track_number": {
+                "type": "integer"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "track"
+                ]
+              },
+              "uri": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
